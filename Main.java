@@ -14,7 +14,15 @@ public class Main extends Frame implements ActionListener, ItemListener {
 
     
     public Main() {
-        setSize(400, 300);
+        Dimension size 
+            = Toolkit.getDefaultToolkit().getScreenSize(); 
+        
+        // width will store the width of the screen 
+        int width = (int)size.getWidth(); 
+        
+        // height will store the height of the screen 
+        int height = (int)size.getHeight(); 
+        setSize(width, height);
         setLayout(null);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
