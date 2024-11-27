@@ -2,24 +2,31 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class ColorSelector extends Frame implements ActionListener {
-    private Button chooseColor = new Button("Choose Color");
-    private Panel colorPanel = new Panel();
+public class Main extends Frame implements ActionListener, ItemListener {
+    Panel p1 = new Panel(); //Auswahl Panel
+    Panel p2 = new Panel(); //Grafik Panel
+    
+    Textfield t1 = new Textfield; //Anzahl
+    Textfield t2 = new Textfield; // Name
+    
+    Button b1 = new Button("Erstellen");
+    Button b2 = new Button ("+");
 
-    public ColorSelector() {
+    
+    public Main() {
         setSize(400, 300);
-        setLayout(new BorderLayout());
+        setLayout(null);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
                 System.exit(0);
             }
         });
-
-        chooseColor.addActionListener(this);
-        colorPanel.setBackground(Color.WHITE);
-
-        add(chooseColor, BorderLayout.SOUTH);
-        add(colorPanel, BorderLayout.CENTER);
+        add(p1); 
+        p1.add(t1); t1.addItemListener(this);
+        p1.add(t2); t1.addItemListener(this);
+        
+        p1.add(b1); b1.addActionListener(this);
+        p1.add(b2); b2.addActionListener(this);
 
         setVisible(true);
     }
@@ -31,6 +38,8 @@ public class ColorSelector extends Frame implements ActionListener {
                 colorPanel.setBackground(color);
             }
         }
+    }
+    public void itemStateChanged(ItemEvent e) {
     }
 
     public static void main(String[] args) {
