@@ -23,13 +23,15 @@ public class Main extends Frame implements ActionListener, ItemListener {
         // height will store the height of the screen 
         int height = (int)size.getHeight(); 
         setSize(width, height);
+
+        
         setLayout(null);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
                 System.exit(0);
             }
         });
-        add(p1); 
+        add(p1); p1.setBounds(width, (height*0.75)); 
         p1.add(t1); t1.addItemListener(this);
         p1.add(t2); t1.addItemListener(this);
         
