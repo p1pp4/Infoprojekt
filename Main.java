@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
-
+//Button "-" textfelder löschen; Nur int möglich einzugeben bei anzahl; nur string bei name; nur int bei textfield anzahl schritte
 public class Main extends Frame implements ActionListener, ItemListener, MouseListener{
   Panel p1 = new Panel(); //Auswahl Panel
   Panel p2 = new Panel(); //Grafik Panel
@@ -12,6 +12,16 @@ public class Main extends Frame implements ActionListener, ItemListener, MouseLi
     
   Button b1 = new Button("Erstellen");
   Button b2 = new Button ("+");
+  
+  Checkbox c = new Checkbox("Mit zurücklegen",true);
+  TextField t = new TextField();
+  
+  Label l1 = new Label("Anzahl");
+  Label l2 = new Label("Name");
+  Label l3 = new Label("Anzahl der Schritte");
+  
+  int anzahl;
+  boolean zuruck;
 
   Dimension size 
     = Toolkit.getDefaultToolkit().getScreenSize(); 
@@ -51,6 +61,15 @@ public class Main extends Frame implements ActionListener, ItemListener, MouseLi
     p1.setLayout(null);
     p1.addMouseListener(this);
     
+    p1.add(l1);
+    l1.setBounds(30,5,80,20);
+    l1.setForeground(new Color(0,100,200));
+    
+    p1.add(l2);
+    l2.setBounds(140,5,80,20);
+    l2.setForeground(new Color(0,100,200));
+    
+    
     p1.add(b1); 
     b1.addActionListener(this); 
     b1.setBounds((int)(width-140),30,80,60); 
@@ -62,6 +81,22 @@ public class Main extends Frame implements ActionListener, ItemListener, MouseLi
     b2.setBounds(30,120,80,60); 
     b2.setForeground(new Color(0,100,200)); 
     //b2.setFont(of);
+    
+    p1.add(c);
+    c.addItemListener(this);
+    c.setBounds((int)(width*0.35),30,100,30);
+    c.setForeground(new Color(0,100,200));
+    
+    p1.add(l3);
+    l3.setBounds((int)(width*0.5),5,150,20);
+    l3.setForeground(new Color(0,100,200));
+    
+    p1.add(t);
+    t.addActionListener(this);
+    t.setBounds((int)(width*0.5),30,150,30);
+    t.setForeground(new Color(0,100,200));
+    
+    
     addTF();
     setVisible(true);
   }
@@ -74,14 +109,33 @@ public class Main extends Frame implements ActionListener, ItemListener, MouseLi
     }
     } */
     if (e.getSource() == b1) {
+      int[]arrA = new int[aA.size()];
+      String[]arrN = new String[aN.size()];
       p2.setSize(width, (int)(height*0.75));
       p1.setBounds(0,(int)(height*0.75), width, (int)(height*0.25));
+      for (int i = 0; i < aA.size(); i++) {
+        
+        arrA[i]=Integer.parseInt(aA.get(i).getText());
+        System.out.print(arrA[i]+" ");
+      }
+      System.out.println(" ");
+      for (int i = 0; i < aN.size(); i++) {
+        arrN[i]=aN.get(i).getText();
+        System.out.print(arrN[i]+" ");
+      }
+      anzahl = Integer.parseInt(t.getText());
+      System.out.println(anzahl);
+      zuruck=c.getState();
+      System.out.println(c.getState());
     } // end of if
     if (e.getSource().equals(b2)) {
       addTF();
+      
     } // end of if
+
   }
   public void itemStateChanged(ItemEvent e) {
+      
   }
   
   public void mouseReleased (MouseEvent e){
@@ -111,8 +165,8 @@ public class Main extends Frame implements ActionListener, ItemListener, MouseLi
   
   public void addTF (){
     
-    String a = "Anzahl";
-    String n = "Name";
+    String a = "";
+    String n = "";
     TextField t1 = new TextField(a); //Anzahl
     TextField t2 = new TextField(n); // Name
     
